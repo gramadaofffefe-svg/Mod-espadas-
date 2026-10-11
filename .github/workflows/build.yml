@@ -1,0 +1,21 @@
+name: Build Mod
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+      - name: Build
+        run: gradle build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swordofruin-jar
+          path: build/libs/*.jar
