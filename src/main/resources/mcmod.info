@@ -1,0 +1,10 @@
+[
+{
+  "modid": "swordofruin",
+  "name": "Sword of Ruin",
+  "description": "Uma espada amaldicoada que executa inimigos em bola de fogo.",
+  "version": "1.0.0",
+  "mcversion": "1.8.9",
+  "authorList": ["Kai"]
+}
+]
