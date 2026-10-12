@@ -6,16 +6,27 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Setup Java 8
+        uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'temurin'
+
+      - name: Setup Gradle 4.10.3
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-4.10.3-bin.zip
+          unzip -q gradle-4.10.3-bin.zip
+          echo "$PWD/gradle-4.10.3/bin" >> $GITHUB_PATH
+
       - name: Build
-        run: gradle build
-      - uses: actions/upload-artifact@v4
+        run: gradle build --no-daemon
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
         with:
           name: swordofruin-jar
           path: build/libs/*.jar
